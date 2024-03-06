@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: user-service
+server:
+  port: 8085
+grpc:
+  server:
+    port: 9090
+  enabled: true

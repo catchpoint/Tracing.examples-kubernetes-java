@@ -1,0 +1,113 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-service
+  labels:
+    app: todo-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-service
+  template:
+    metadata:
+      labels:
+        app: todo-service
+    spec:
+      containers:
+        - name: todo-service
+          image: todo-app
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: todo-service
+            - name: GRPC_USER_ENABLED
+              value: "true"
+            - name: MYSQL_URL
+              value: jdbc:mysql://mysql.todo-apps.svc.cluster.local:3306/tododb?createDatabaseIfNotExist=true
+            - name: MYSQL_USER
+              value: root
+            - name: MYSQL_PASSWORD
+              value: root
+      initContainers:
+        - name: init-mysql
+          image: busybox
+          command: ['sh', '-c', 'until nslookup mysql.todo-apps.svc.cluster.local; do echo Waiting for MySQL ...; sleep 2; done;']
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+  labels:
+    app: user-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+        - name: user-service
+          image: todo-app
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8085
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: user-service
+            - name: MYSQL_URL
+              value: jdbc:mysql://mysql.todo-apps.svc.cluster.local:3306/userdb?createDatabaseIfNotExist=true
+            - name: MYSQL_USER
+              value: root
+            - name: MYSQL_PASSWORD
+              value: root
+      initContainers:
+        - name: init-mysql
+          image: busybox
+          command: ['sh', '-c', 'until nslookup mysql.todo-apps.svc.cluster.local; do echo Waiting for MySQL ...; sleep 2; done;']
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-svc
+  labels:
+    app: todo-svc
+spec:
+  type: NodePort
+  selector:
+    app: todo-service
+  ports:
+    - protocol: TCP
+      port: 5000
+      nodePort: 30000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-svc
+  labels:
+    app: user-svc
+spec:
+  selector:
+    app: user-service
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8085
+      targetPort: 8085
+    - name: grpc
+      protocol: TCP
+      port: 9090
+      targetPort: 9090

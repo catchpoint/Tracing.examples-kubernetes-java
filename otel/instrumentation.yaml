@@ -1,0 +1,17 @@
+apiVersion: opentelemetry.io/v1alpha1
+kind: Instrumentation
+metadata:
+  name: otel-instrumentation
+spec:
+  exporter:
+    endpoint: http://otel-collector.opentelemetry-operator-system:4317
+  propagators:
+    - tracecontext
+    - baggage
+  sampler:
+    type: always_on
+  env:
+    - name: OTEL_TRACES_EXPORTER
+      value: otlp
+    - name: OTEL_EXPORTER_OTLP_PROTOCOL
+      value: grpc

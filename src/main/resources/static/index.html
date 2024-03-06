@@ -1,0 +1,46 @@
+<html lang="en" data-framework="javascript">
+    <head>
+        <meta charset="utf-8">
+        <title>Todo App</title>
+        <link href="css/style.css" rel="stylesheet">
+        <script src="js/vendor/jquery-3.3.1.min.js"></script>
+        <script src="js/vendor/vue.js"></script>
+        <script src="js/app.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <section class="todoapp">
+                <header class="header">
+                    <h1>todos</h1>
+                    <input id="new-todo" class="new-todo" v-model="newTodoTitle" v-on:keypress="onAddTodoPressed" autofocus="" placeholder="What needs to be done?" data-selector="input-new-todo">
+                </header>
+                <section class="main">
+                    <input class="toggle-all" type="checkbox" data-selector="checkbox-toggle-all" v-on:click="toggleAll()">
+                    <label for="toggle-all">Mark all as complete</label>
+                    <ul class="todo-list">
+                        <todo-item v-for="todo in filteredTodos" v-bind:todo="todo" v-on:remove-todo="removeTodo" v-on:duplicate-todo="duplicateTodo"
+                                   v-on:update-todo="updateTodo" />
+                    </ul>
+                </section>
+                <footer class="footer">
+                    <span class="todo-count">{{filteredTodos.length}} Tasks</span>
+                    <ul class="filters">
+                        <li>
+                            <a style="cursor: pointer" v-on:click="setFilter('all')" v-bind:class="{selected: filterMode === 'all'}" data-selector="link-filter-all">All</a>
+                        </li>
+                        <li>
+                            <a style="cursor: pointer" v-on:click="setFilter('active')" v-bind:class="{selected: filterMode === 'active'}" data-selector="link-filter-active">Active</a>
+                        </li>
+                        <li>
+                            <a style="cursor: pointer" v-on:click="setFilter('completed')" v-bind:class="{selected: filterMode === 'completed'}" data-selector="link-filter-completed">Completed</a>
+                        </li>
+                    </ul>
+                    <button v-on:click="clearCompleted" class="clear-completed" data-selector="link-clear-completed">Clear completed</button>
+                </footer>
+            </section>
+            <footer class="info">
+                <p>Double-click to edit a todo</p>
+            </footer>
+        </div>
+    </body>
+</html>

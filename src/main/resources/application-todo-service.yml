@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: todo-service
+  schedule:
+    enabled: true
+server:
+  port: 5000
+user:
+  check:
+    enabled: true
+grpc:
+  user:
+    host: ${USER_SVC_PORT_9090_TCP_ADDR:localhost}
+    port: 9090
+  enabled: false
+  server:
+    port: -1

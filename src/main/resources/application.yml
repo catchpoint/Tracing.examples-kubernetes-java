@@ -1,0 +1,23 @@
+spring:
+  sql:
+    init:
+      mode: always
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${MYSQL_URL}
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:root}
+  jpa:
+    database: mysql
+    defer-datasource-initialization: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+user:
+  check:
+    enabled: false
+  service:
+    protocol: http
+    host: localhost
+    port: 8085

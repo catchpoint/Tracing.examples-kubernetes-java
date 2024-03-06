@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package com.catchpoint.tracing.examples.todo.grpc;
+
+option java_multiple_files = true;
+option java_package = "com.catchpoint.tracing.examples.todo.grpc";
+option java_outer_classname = "UserServiceProto";
+
+service UserService {
+  rpc GetUser (GRPCUserRequest) returns (GRPCUser) {
+  }
+}
+
+message GRPCUserRequest {
+  string email = 1;
+}
+
+message GRPCUser {
+  string email = 1;
+  string firstName = 2;
+  string lastName = 3;
+}

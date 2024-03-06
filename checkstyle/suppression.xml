@@ -1,0 +1,16 @@
+<!DOCTYPE suppressions PUBLIC
+        "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+        "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+    <!--GLOBAL SUPPRESSIONS-->
+    <suppress files="" checks="InterfaceIsType"/>
+    <suppress files="" checks="javadoc"/>
+    <suppress files="" checks="OperatorWrapCheck"/>
+    <suppress files="" checks="DesignForExtensionCheck"/>
+    <suppress files="" checks="HiddenFieldCheck"/>
+    <suppress files="" checks="FinalParameters"/>
+    <suppress files="" checks="RegexpSingleline"/>
+    <suppress files="" checks="Hide"/>
+    <suppress files="[\\/]generated-sources/protobuf[\\/]" checks="[a-zA-Z0-9]*"/>
+</suppressions>

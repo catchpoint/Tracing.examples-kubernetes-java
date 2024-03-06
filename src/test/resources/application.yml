@@ -1,0 +1,27 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: always
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+    defer-datasource-initialization: true
+  schedule:
+    enabled: false         
+chaos:
+  enabled: false
+user:
+  check:
+    enabled: false
+  service:
+    protocol: http
+    host: localhost
+    port: 8085
+aws:
+  sdk:
+    enabled: false

@@ -2,19 +2,22 @@ spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${MYSQL_URL}
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:root}
   sql:
     init:
       mode: always
   jpa:
-    hibernate.ddl-auto: update
-    generate-ddl: true
-    show-sql: true
+    database: mysql
     defer-datasource-initialization: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    show-sql: true
   schedule:
-    enabled: false         
-chaos:
-  enabled: false
+    enabled: false
 user:
   check:
     enabled: false
@@ -22,6 +25,3 @@ user:
     protocol: http
     host: localhost
     port: 8085
-aws:
-  sdk:
-    enabled: false

@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.catchpoint.tracing</groupId>
+    <groupId>com.catchpoint.tracing.examples</groupId>
     <artifactId>catchpoint-tracing-examples-todo-app</artifactId>
     <version>1.0.0</version>
     <name>catchpoint-tracing-examples-todo-app</name>

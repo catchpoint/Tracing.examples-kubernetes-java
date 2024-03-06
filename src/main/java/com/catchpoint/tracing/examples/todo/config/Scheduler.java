@@ -15,6 +15,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 public class Scheduler {
 
     private static final long FIVE_MINUTES = 5 * 60 * 1000;
+
     private final TodoService service;
     
     public Scheduler(TodoService service) {
@@ -25,4 +26,5 @@ public class Scheduler {
     private void clearOldTodos() {
         service.clearOldTodos();
     }
+
 }

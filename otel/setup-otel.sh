@@ -17,7 +17,7 @@ echo "==========================================================================
 while ! kubectl get namespace cert-manager &> /dev/null;
 do
     apply_manifest https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.yaml
-    sleep 5
+    sleep 120
 done
 check_command
 echo "================================================================================"
@@ -28,7 +28,7 @@ echo "==========================================================================
 while ! kubectl get namespace opentelemetry-operator-system &> /dev/null;
 do
   apply_manifest https://github.com/open-telemetry/opentelemetry-operator/releases/latest/download/opentelemetry-operator.yaml
-  sleep 5
+  sleep 120
 done
 check_command
 echo "================================================================================"
@@ -41,7 +41,7 @@ echo "==========================================================================
 while ! kubectl get opentelemetrycollector otel -o jsonpath='{.metadata.name}' &> /dev/null;
 do
     apply_manifest otel/collector.yaml
-    sleep 5
+    sleep 15
 done
 check_command
 echo "================================================================================"
@@ -52,7 +52,7 @@ echo "==========================================================================
 while ! kubectl get instrumentation otel-instrumentation -o jsonpath='{.metadata.name}' &> /dev/null;
 do
     apply_manifest otel/instrumentation.yaml
-    sleep 5
+    sleep 15
 done
 check_command
 echo "================================================================================"

@@ -8,6 +8,29 @@
 4. Please make sure **Kubernetes CLI** (`kubernetes-cli`/`kubectl`) is installed. 
    See [here](https://kubernetes.io/docs/tasks/tools/) for details.
    
+## Windows Preparation
+1. Install chocolatey 
+```bash
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+```
+2. Install Git for Windows
+```bash
+choco install git
+```
+3. Install Maven [if not installed]
+```bash
+choco install maven
+```
+4. Install JDK [if not installed]
+```bash
+choco install jdk8
+```
+
+> [!WARNING]  
+> For the **Windows** environment, please make sure you are running the commands in **Git Bash**. Otherwise, the scripts below will not work as expected.
+> 
+> Open **Git Bash** and go to the directory where the scripts are located.
+
 ## Setup with OpenTelemetry From the Beginning
 This setup shows how you can install OpenTelemetry resources into Kubernetes first and deploy application later then.
 So deployed applications will be auto instrumented.
